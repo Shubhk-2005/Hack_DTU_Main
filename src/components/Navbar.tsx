@@ -60,13 +60,13 @@ export const Navbar = () => {
 
         {/* CTA Buttons */}
         <div className="hidden md:flex items-center gap-4">
-          <Link to="/login">
+          <Link to="/login/seeker">
             <Button variant="ghost" size="sm">
               Sign In
             </Button>
           </Link>
-          <Link to="/login">
-            <Button variant="hero" size="sm">
+          <Link to="/login/seeker">
+            <Button variant="seeker" size="sm">
               Get Started
             </Button>
           </Link>
@@ -96,13 +96,13 @@ export const Navbar = () => {
               </a>
             ))}
             <div className="flex flex-col gap-3 pt-4 border-t border-border">
-              <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link to="/login/seeker" onClick={() => setIsMobileMenuOpen(false)}>
                 <Button variant="outline" className="w-full">
                   Sign In
                 </Button>
               </Link>
-              <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button variant="hero" className="w-full">
+              <Link to="/login/seeker" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button variant="seeker" className="w-full">
                   Get Started
                 </Button>
               </Link>

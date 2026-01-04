@@ -33,17 +33,18 @@ export const CTASection = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/login">
-              <Button variant="hero" size="xl" className="group">
-                Create Free Account
+            <Link to="/login/seeker">
+              <Button variant="seeker" size="xl" className="group">
+                I'm a Job Seeker
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <a href="#features">
-              <Button variant="glass" size="xl">
-                Learn More
+            <Link to="/login/employer">
+              <Button variant="employer" size="xl" className="group">
+                I'm an Employer
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-            </a>
+            </Link>
           </div>
           
           <p className="text-sm text-muted-foreground mt-8">

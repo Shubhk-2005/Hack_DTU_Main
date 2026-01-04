@@ -9,15 +9,15 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-button hover:shadow-glow hover:scale-105",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft hover:shadow-button hover:scale-105",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border-2 border-primary/50 bg-transparent text-primary hover:bg-primary/10 hover:border-primary hover:scale-105",
+        outline: "border-2 border-primary/30 bg-transparent text-primary hover:bg-primary/5 hover:border-primary hover:scale-105",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent/20 hover:text-foreground",
+        ghost: "hover:bg-primary/5 hover:text-primary",
         link: "text-primary underline-offset-4 hover:underline",
-        hero: "bg-gradient-to-r from-primary via-[hsl(199_89%_48%)] to-[hsl(252_94%_67%)] text-primary-foreground shadow-button hover:shadow-glow hover:scale-105 animate-gradient bg-[length:200%_200%]",
-        accent: "bg-accent text-accent-foreground hover:bg-accent/90 shadow-button hover:scale-105",
-        glass: "glass text-foreground hover:bg-card/60 hover:scale-105 border-primary/30",
+        seeker: "bg-gradient-to-r from-[hsl(221_83%_53%)] to-[hsl(199_89%_48%)] text-primary-foreground shadow-soft hover:shadow-button hover:scale-105 animate-gradient bg-[length:200%_200%]",
+        employer: "bg-gradient-to-r from-[hsl(174_72%_40%)] to-[hsl(160_84%_39%)] text-primary-foreground shadow-soft hover:shadow-button hover:scale-105 animate-gradient bg-[length:200%_200%]",
+        glass: "bg-background/80 backdrop-blur-sm text-foreground hover:bg-background border border-border hover:scale-105 shadow-soft",
       },
       size: {
         default: "h-11 px-6 py-2",
