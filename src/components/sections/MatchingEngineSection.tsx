@@ -27,7 +27,7 @@ export const MatchingEngineSection = () => {
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Our Sentence Transformer with k-Nearest Neighbors understands meaning, not just keywords.
-            Deep Learning skills? We know you're perfect for Computer Vision roles.
+            Whether it's Data Science, Marketing, Finance, or HR—we match you with roles that truly fit your skills.
           </p>
         </RevealOnScroll>
         
@@ -44,16 +44,16 @@ export const MatchingEngineSection = () => {
                   
                   {/* Connecting nodes */}
                   <div className="absolute -top-20 left-1/2 -translate-x-1/2 animate-float" style={{ animationDelay: '0s' }}>
-                    <div className="glass rounded-xl px-4 py-2 text-sm font-medium">Deep Learning</div>
+                    <div className="glass rounded-xl px-4 py-2 text-sm font-medium">Marketing</div>
                   </div>
                   <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 animate-float" style={{ animationDelay: '1s' }}>
-                    <div className="glass rounded-xl px-4 py-2 text-sm font-medium">Computer Vision</div>
+                    <div className="glass rounded-xl px-4 py-2 text-sm font-medium">Finance</div>
                   </div>
                   <div className="absolute top-1/2 -left-32 -translate-y-1/2 animate-float" style={{ animationDelay: '2s' }}>
-                    <div className="glass rounded-xl px-4 py-2 text-sm font-medium">Python</div>
+                    <div className="glass rounded-xl px-4 py-2 text-sm font-medium">Strategy</div>
                   </div>
                   <div className="absolute top-1/2 -right-32 -translate-y-1/2 animate-float" style={{ animationDelay: '3s' }}>
-                    <div className="glass rounded-xl px-4 py-2 text-sm font-medium">ML Engineer</div>
+                    <div className="glass rounded-xl px-4 py-2 text-sm font-medium">Leadership</div>
                   </div>
                 </div>
               </div>
@@ -83,8 +83,8 @@ export const MatchingEngineSection = () => {
                   <Zap className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-display text-xl font-bold mb-2">40% Faster Processing</h3>
-                  <p className="text-muted-foreground">Optimized for AWS Graviton (ARM) processors, delivering lightning-fast matches at lower cost.</p>
+                  <h3 className="font-display text-xl font-bold mb-2">Top 5 Curated Matches</h3>
+                  <p className="text-muted-foreground">No endless scrolling! Get only your top 5 most relevant opportunities, saving hours of job hunting.</p>
                 </div>
               </div>
               
@@ -93,8 +93,8 @@ export const MatchingEngineSection = () => {
                   <TrendingUp className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-display text-xl font-bold mb-2">Human-Level Intelligence</h3>
-                  <p className="text-muted-foreground">Lightweight ML that understands context and meaning, not heavy LLMs that break the bank.</p>
+                  <h3 className="font-display text-xl font-bold mb-2">Complete Transparency</h3>
+                  <p className="text-muted-foreground">See exactly why you matched—70% skills, 30% location. No mystery, no guesswork, just clear explanations.</p>
                 </div>
               </div>
               
@@ -103,8 +103,8 @@ export const MatchingEngineSection = () => {
                   <Shield className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-display text-xl font-bold mb-2">Production Ready</h3>
-                  <p className="text-muted-foreground">Built with Python, React, MongoDB, and Docker. Ready to scale to millions of users.</p>
+                  <h3 className="font-display text-xl font-bold mb-2">Instant Resume Builder</h3>
+                  <p className="text-muted-foreground">Auto-generate ATS-friendly resumes from your profile in seconds. No formatting stress, just professional results.</p>
                 </div>
               </div>
             </div>

@@ -43,8 +43,8 @@ export const ProblemsSection = () => {
             Ending <span className="text-gradient">Opportunity Fatigue</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Students are overwhelmed by endless, irrelevant job listings. 
-            YuvaSetu cuts through the noise with intelligent, transparent matching.
+            Job seekers across all fields are overwhelmed by endless, irrelevant listings. 
+            YuvaSetu cuts through the noise with intelligent, transparent matching for every career path.
           </p>
         </RevealOnScroll>
         

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { Menu, X } from 'lucide-react';
 
 export const Navbar = () => {
@@ -17,10 +18,9 @@ export const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Features', href: '#features' },
-    { name: 'How it Works', href: '#how-it-works' },
-    { name: 'About', href: '#about' },
-    { name: 'Testimonials', href: '#testimonials' },
+    { name: 'Features', href: '/#features', homeOnly: true },
+    { name: 'How it Works', href: '/#how-it-works', homeOnly: true },
+    { name: 'Testimonials', href: '/#testimonials', homeOnly: true },
   ];
 
   const isHomePage = location.pathname === '/';
@@ -43,9 +43,9 @@ export const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        {isHomePage && (
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => 
+            (!link.homeOnly || isHomePage) && (
               <a
                 key={link.name}
                 href={link.href}
@@ -54,12 +54,20 @@ export const Navbar = () => {
                 {link.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
-            ))}
-          </div>
-        )}
+            )
+          )}
+          <Link
+            to="/about"
+            className="text-muted-foreground hover:text-foreground transition-colors duration-300 font-medium relative group"
+          >
+            About
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+          </Link>
+        </div>
 
         {/* CTA Buttons */}
         <div className="hidden md:flex items-center gap-4">
+          <ThemeToggle />
           <Link to="/login/seeker">
             <Button variant="ghost" size="sm">
               Sign In
@@ -85,16 +93,29 @@ export const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 glass-strong border-t border-border animate-fade-in">
           <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
-            {isHomePage && navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => 
+              (!link.homeOnly || isHomePage) && (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-muted-foreground hover:text-foreground transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.name}
+                </a>
+              )
+            )}
+            <Link 
+              to="/about"
+              className="text-muted-foreground hover:text-foreground transition-colors py-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              About
+            </Link>
+            <div className="flex items-center justify-between py-2 border-t border-border mt-2 pt-4">
+              <span className="text-sm text-muted-foreground">Theme</span>
+              <ThemeToggle />
+            </div>
             <div className="flex flex-col gap-3 pt-4 border-t border-border">
               <Link to="/login/seeker" onClick={() => setIsMobileMenuOpen(false)}>
                 <Button variant="outline" className="w-full">

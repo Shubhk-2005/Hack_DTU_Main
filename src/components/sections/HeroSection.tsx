@@ -62,21 +62,21 @@ export const HeroSection = () => {
           
           {/* Stats */}
           <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <div className="text-center p-4 rounded-2xl bg-card/50 border border-border/50 shadow-soft">
+            <div className="text-center p-4 rounded-2xl bg-card/80 border border-border shadow-soft backdrop-blur-xl">
               <div className="flex items-center justify-center gap-2 mb-2">
                 <Zap className="w-5 h-5 text-primary" />
                 <span className="font-display text-3xl md:text-4xl font-bold text-foreground">40%</span>
               </div>
               <p className="text-sm text-muted-foreground">Faster Matching</p>
             </div>
-            <div className="text-center p-4 rounded-2xl bg-card/50 border border-border/50 shadow-soft">
+            <div className="text-center p-4 rounded-2xl bg-card/80 border border-border shadow-soft backdrop-blur-xl">
               <div className="flex items-center justify-center gap-2 mb-2">
                 <Users className="w-5 h-5 text-accent" />
                 <span className="font-display text-3xl md:text-4xl font-bold text-foreground">Top 5</span>
               </div>
               <p className="text-sm text-muted-foreground">Curated Jobs</p>
             </div>
-            <div className="text-center p-4 rounded-2xl bg-card/50 border border-border/50 shadow-soft">
+            <div className="text-center p-4 rounded-2xl bg-card/80 border border-border shadow-soft backdrop-blur-xl">
               <div className="flex items-center justify-center gap-2 mb-2">
                 <Sparkles className="w-5 h-5 text-primary" />
                 <span className="font-display text-3xl md:text-4xl font-bold text-foreground">100%</span>

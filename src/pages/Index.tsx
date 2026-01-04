@@ -2,9 +2,8 @@ import { Navbar } from '@/components/Navbar';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { ProblemsSection } from '@/components/sections/ProblemsSection';
 import { MatchingEngineSection } from '@/components/sections/MatchingEngineSection';
-import { TeamSection } from '@/components/sections/TeamSection';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
-import { CTASection } from '@/components/sections/CTASection';
+import { FAQSection } from '@/components/sections/FAQSection';
 import { Footer } from '@/components/Footer';
 import { Helmet } from 'react-helmet-async';
 
@@ -22,9 +21,8 @@ const Index = () => {
         <HeroSection />
         <ProblemsSection />
         <MatchingEngineSection />
-        <TeamSection />
         <TestimonialsSection />
-        <CTASection />
+        <FAQSection />
         <Footer />
       </main>
     </>
