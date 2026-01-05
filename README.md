@@ -1,73 +1,89 @@
-# Welcome to your Lovable project
+# YuvaSetu - Your Career Compass
 
-## Project info
+Welcome to **YuvaSetu**, a comprehensive platform designed to guide students and job seekers in their career journeys. This project is structured as a monorepo containing both the frontend application and backend services.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 📂 Project Structure
 
-## How can I edit this code?
+- **`frontend/`**: The user interface built with React, Vite, TypeScript, and Tailwind CSS.
+- **`backend/`**: The backend services and logic (Under Development).
 
-There are several ways of editing your application.
+## 🚀 Getting Started
 
-**Use Lovable**
+### Prerequisites
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Ensure you have the following installed:
 
-Changes made via Lovable will be committed automatically to this repo.
+- [Node.js](https://nodejs.org/) (Latest LTS recommended)
+- [npm](https://www.npmjs.com/)
 
-**Use your preferred IDE**
+### Installation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1.  **Clone the repository:**
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+    ```bash
+    git clone https://github.com/Shubhk-2005/yuvasetu-your-career-compass.git
+    cd Hack_DTU_Main
+    ```
 
-Follow these steps:
+2.  **Install dependencies:**
+    Run the following command from the root directory to install dependencies for the frontend workspace:
+    ```bash
+    npm install
+    ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### 🛠 Running the Project
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+You can execute project commands directly from the root directory. These commands are delegated to the `frontend` workspace for convenience.
 
-# Step 3: Install the necessary dependencies.
-npm i
+- **Start Development Server:**
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+  ```bash
+  npm run dev
+  ```
 
-**Edit a file directly in GitHub**
+  Runs the frontend app in development mode. Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- **Build for Production:**
 
-**Use GitHub Codespaces**
+  ```bash
+  npm run build
+  ```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+  Builds the frontend application for production.
 
-## What technologies are used for this project?
+- **Lint Code:**
 
-This project is built with:
+  ```bash
+  npm run lint
+  ```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+  Runs ESLint to check for code quality issues.
 
-## How can I deploy this project?
+- **Preview Production Build:**
+  ```bash
+  npm run preview
+  ```
+  Locally preview the production build.
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## 💻 Technologies Used
 
-## Can I connect a custom domain to my Lovable project?
+### Frontend
 
-Yes, you can!
+- **Framework**: [React](https://react.dev/) + [Vite](https://vitejs.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **State Management**: React Query (@tanstack/react-query)
+- **Routing**: React Router DOM
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Backend
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- Node.js (In Progress)
+
+## 🤝 Contributing
+
+1.  Fork the repository.
+2.  Create a new branch (`git checkout -b feature/AmazingFeature`).
+3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4.  Push to the branch (`git push origin feature/AmazingFeature`).
+5.  Open a Pull Request.
