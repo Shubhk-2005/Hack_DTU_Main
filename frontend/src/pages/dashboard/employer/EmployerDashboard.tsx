@@ -2,6 +2,7 @@ import { Users, Briefcase, BarChart3, Plus, Search, MoreHorizontal } from 'lucid
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
+import { useNavigate } from 'react-router-dom';
 
 const STATS = [
   { label: 'Active Jobs', value: '12', icon: Briefcase, color: 'text-primary', bg: 'bg-primary/10' },
@@ -22,17 +23,18 @@ const RECENT_CANDIDATES = [
 ];
 
 export const EmployerDashboard = () => {
+  const navigate = useNavigate();
   return (
     <div className="max-w-7xl mx-auto space-y-8">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-end gap-4">
         <div>
           <h1 className="font-display text-3xl font-bold mb-2">
-            Employer <span className="text-accent">Overview</span>
+            Welcome back, <span className="text-accent">Employer</span>!
           </h1>
           <p className="text-muted-foreground">Manage your job postings and hiring pipeline.</p>
         </div>
-        <Button variant="employer" className="gap-2 shadow-button">
+        <Button variant="employer" className="gap-2 shadow-button" onClick={() => navigate('/dashboard/employer/post-job')}>
           <Plus className="w-4 h-4" />
           Post New Job
         </Button>
@@ -58,7 +60,7 @@ export const EmployerDashboard = () => {
         <div className="lg:col-span-2 bg-card border border-border rounded-3xl overflow-hidden">
           <div className="p-6 border-b border-border flex items-center justify-between">
             <h2 className="font-bold text-xl">Active Job Postings</h2>
-            <Button variant="ghost" size="sm">View All</Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate('/dashboard/employer/post-job')}>View All</Button>
           </div>
           <div className="p-6">
             <div className="space-y-4">
@@ -80,7 +82,7 @@ export const EmployerDashboard = () => {
                       <p className="text-xl font-bold">{job.candidates}</p>
                       <p className="text-xs text-muted-foreground uppercase">Applicants</p>
                     </div>
-                    <Button variant="outline" size="sm">Manage</Button>
+                    <Button variant="outline" size="sm" onClick={() => navigate(`/dashboard/employer/postings/${job.id}`)}>Manage</Button>
                   </div>
                 </div>
               ))}

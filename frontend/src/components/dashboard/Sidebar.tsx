@@ -1,20 +1,22 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Briefcase, BookOpen, Send, User, Settings, LogOut, Users, Building2 } from 'lucide-react';
+import { LayoutDashboard, Briefcase, BookOpen, Send, User, Settings, LogOut, Users, Building2, TrendingUp, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const SEEKER_NAV = [
   { icon: LayoutDashboard, label: 'Overview', href: '/dashboard' },
-  { icon: Briefcase, label: 'Find Jobs', href: '/dashboard/jobs' },
+
   { icon: Send, label: 'Applications', href: '/dashboard/applications' },
+  { icon: TrendingUp, label: 'Skill Gap', href: '/dashboard/skill-gap' },
   { icon: BookOpen, label: 'Upskill', href: '/dashboard/upskill' },
   { icon: User, label: 'My Profile', href: '/dashboard/profile' },
   { icon: Settings, label: 'Settings', href: '/dashboard/settings' },
+
 ];
 
 const EMPLOYER_NAV = [
   { icon: LayoutDashboard, label: 'Overview', href: '/dashboard/employer' },
   { icon: Briefcase, label: 'Post a Job', href: '/dashboard/employer/post-job' },
-  { icon: Users, label: 'Candidates', href: '/dashboard/employer/candidates' },
+  { icon: FileText, label: 'My Postings', href: '/dashboard/employer/postings' },
   { icon: Building2, label: 'Company Profile', href: '/dashboard/employer/profile' },
   { icon: Settings, label: 'Settings', href: '/dashboard/employer/settings' },
 ];
@@ -25,7 +27,7 @@ export const DashboardSidebar = () => {
   const navItems = isEmployer ? EMPLOYER_NAV : SEEKER_NAV;
 
   return (
-    <div className="fixed left-0 top-0 h-screen w-64 bg-card border-r border-border flex flex-col z-40 hidden lg:flex">
+    <div className="fixed left-0 top-0 h-screen w-64 bg-card border-r border-border flex-col z-40 hidden lg:flex">
       {/* Logo */}
       <div className="p-8">
         <Link to="/dashboard" className="flex items-center gap-3 group">

@@ -21,11 +21,19 @@ import { EmployerLayout } from "./pages/dashboard/employer/EmployerLayout";
 import { PostJob } from "./pages/dashboard/employer/PostJob";
 import { Candidates } from "./pages/dashboard/employer/Candidates";
 import { CompanyProfile } from "./pages/dashboard/employer/CompanyProfile";
+import { EmployerSettings } from "./pages/dashboard/employer/EmployerSettings";
+import { MyPostings } from "./pages/dashboard/employer/MyPostings";
+import { JobPostingDetail } from "./pages/dashboard/employer/JobPostingDetail";
 
-import { FindJobs } from "./pages/dashboard/seeker/FindJobs";
+
 import { Applications } from "./pages/dashboard/seeker/Applications";
 import { Upskill } from "./pages/dashboard/seeker/Upskill";
 import { UserProfile } from "./pages/dashboard/seeker/UserProfile";
+import { SeekerSettings } from "./pages/dashboard/seeker/SeekerSettings";
+import { SkillGapAnalysis } from "./pages/dashboard/seeker/SkillGapAnalysis";
+import { JobApplication } from "./pages/dashboard/seeker/JobApplication";
+import { ApplicationDetails } from "./pages/dashboard/seeker/ApplicationDetails";
+
 
 const queryClient = new QueryClient();
 
@@ -54,15 +62,22 @@ const App = () => (
               {/* Dashboard Routes */}
               <Route path="/dashboard" element={<DashboardLayout />}>
                 <Route index element={<SeekerDashboard />} />
-                <Route path="jobs" element={<FindJobs />} />
+                <Route path="jobs/:jobId/apply" element={<JobApplication />} />
                 <Route path="applications" element={<Applications />} />
+                <Route path="applications/:id" element={<ApplicationDetails />} />
+
+                <Route path="skill-gap" element={<SkillGapAnalysis />} />
                 <Route path="upskill" element={<Upskill />} />
                 <Route path="profile" element={<UserProfile />} />
+                <Route path="settings" element={<SeekerSettings />} />
+                <Route path="skill-gap" element={<SkillGapAnalysis />} />
                 <Route path="employer" element={<EmployerLayout />}>
                   <Route index element={<EmployerDashboard />} />
                   <Route path="post-job" element={<PostJob />} />
-                  <Route path="candidates" element={<Candidates />} />
+                  <Route path="postings" element={<MyPostings />} />
+                  <Route path="postings/:id" element={<JobPostingDetail />} />
                   <Route path="profile" element={<CompanyProfile />} />
+                  <Route path="settings" element={<EmployerSettings />} />
                 </Route>
               </Route>
               <Route path="*" element={<NotFound />} />

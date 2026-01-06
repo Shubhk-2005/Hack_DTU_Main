@@ -1,4 +1,5 @@
 import { TrendingUp, BookOpen, ChevronRight, Lock } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 
@@ -26,7 +27,9 @@ export const SkillGapWidget = () => {
             <p className="text-sm text-muted-foreground">Path to <span className="font-medium text-foreground">{targetRole}</span></p>
           </div>
         </div>
-        <Button variant="ghost" size="sm" className="text-muted-foreground">View Full Report</Button>
+        <Link to="/dashboard/skill-gap">
+          <Button variant="ghost" size="sm" className="text-muted-foreground">View Full Report</Button>
+        </Link>
       </div>
 
       <div className="mb-6">

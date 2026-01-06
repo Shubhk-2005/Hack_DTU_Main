@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Eye, EyeOff, Mail, Lock, User, Briefcase, UserSearch, Building2, ArrowRight } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, User, Briefcase, UserSearch, Building2, ArrowRight, Loader2, Check, AlertCircle } from 'lucide-react';
+import { toast } from 'sonner';
 
 export const LoginPage = () => {
   const { userType = 'seeker' } = useParams<{ userType: 'seeker' | 'employer' }>();
@@ -14,23 +15,81 @@ export const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [companyName, setCompanyName] = useState('');
+  
+  // New states for UX improvements
+  const [isLoading, setIsLoading] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Email validation
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    setEmailError('');
+    setIsEmailValid(validateEmail(value));
+  };
+
+  const handleEmailBlur = () => {
+    if (email && !validateEmail(email)) {
+      setEmailError('Please enter a valid email address');
+      setIsEmailValid(false);
+    }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    setPasswordError('');
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate before submit
+    let hasErrors = false;
+    
+    if (!validateEmail(email)) {
+      setEmailError('Please enter a valid email address');
+      hasErrors = true;
+    }
+    
+    if (password.length < 6) {
+      setPasswordError('Password must be at least 6 characters');
+      hasErrors = true;
+    }
+    
+    if (hasErrors) return;
+    
+    setIsLoading(true);
+    
     console.log({ email, password, name, companyName, isLogin, userType });
     
-    // Simulate login/signup delay
+    // Simulate API call
     setTimeout(() => {
-      if (isSeeker) {
-        if (isLogin) {
-          window.location.href = '/dashboard';
+      setIsLoading(false);
+      
+      // Show success toast
+      toast.success(isLogin ? 'Welcome back!' : 'Account created successfully!', {
+        description: 'Redirecting to your dashboard...',
+      });
+      
+      // Redirect after showing success
+      setTimeout(() => {
+        if (isSeeker) {
+          if (isLogin) {
+            window.location.href = '/dashboard';
+          } else {
+            window.location.href = '/onboarding';
+          }
         } else {
-          window.location.href = '/onboarding';
+          window.location.href = '/dashboard/employer';
         }
-      } else {
-        // Employer flow
-        window.location.href = '/dashboard/employer';
-      }
+      }, 1000);
     }, 1000);
   };
 
@@ -259,11 +318,27 @@ export const LoginPage = () => {
                   type="email"
                   placeholder="Email Address"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="pl-12 h-12"
+                  onChange={handleEmailChange}
+                  onBlur={handleEmailBlur}
+                  className={`pl-12 pr-12 h-12 ${
+                    emailError ? 'border-red-500 focus-visible:ring-red-500' : 
+                    isEmailValid ? 'border-green-500 focus-visible:ring-green-500' : ''
+                  }`}
                   required
                 />
+                {isEmailValid && (
+                  <Check className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500" />
+                )}
+                {emailError && (
+                  <AlertCircle className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-red-500" />
+                )}
               </div>
+              {emailError && (
+                <p className="text-sm text-red-500 mt-1 flex items-center gap-1">
+                  <AlertCircle className="w-3 h-3" />
+                  {emailError}
+                </p>
+              )}
               
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -271,8 +346,10 @@ export const LoginPage = () => {
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="pl-12 pr-12 h-12"
+                  onChange={handlePasswordChange}
+                  className={`pl-12 pr-12 h-12 ${
+                    passwordError ? 'border-red-500 focus-visible:ring-red-500' : ''
+                  }`}
                   required
                 />
                 <button
@@ -283,6 +360,12 @@ export const LoginPage = () => {
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
+              {passwordError && (
+                <p className="text-sm text-red-500 mt-1 flex items-center gap-1">
+                  <AlertCircle className="w-3 h-3" />
+                  {passwordError}
+                </p>
+              )}
 
               {isLogin && (
                 <div className="flex justify-between items-center text-sm">
@@ -301,8 +384,16 @@ export const LoginPage = () => {
                 variant={isSeeker ? 'seeker' : 'employer'} 
                 size="lg" 
                 className="w-full h-12"
+                disabled={isLoading}
               >
-                {isLogin ? 'Sign In' : 'Create Account'}
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                    {isLogin ? 'Signing in...' : 'Creating account...'}
+                  </>
+                ) : (
+                  isLogin ? 'Sign In' : 'Create Account'
+                )}
               </Button>
             </form>
 

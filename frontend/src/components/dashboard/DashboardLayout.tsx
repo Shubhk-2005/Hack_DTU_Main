@@ -23,7 +23,10 @@ export const DashboardLayout = () => {
       
       {/* Main Content Wrapper */}
       <div className="flex-1 lg:ml-64 flex flex-col min-h-screen transition-all duration-300">
-        <DashboardHeader onMenuClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+        <DashboardHeader 
+          onMenuClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+          title={isEmployer ? "Employer Dashboard" : "User Dashboard"}
+        />
         
         <main className="flex-1 p-4 md:p-8 animate-fade-in">
           <Outlet />

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Search, Filter, MapPin, Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

@@ -1,45 +1,12 @@
-import { MoreHorizontal, ExternalLink, Calendar, CheckCircle2, XCircle, Clock, Timer } from 'lucide-react';
+
+
+import { MoreHorizontal, ExternalLink, Calendar, CheckCircle2, XCircle, Clock, Timer, ChevronRight, Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { useNavigate } from 'react-router-dom';
+import { APPLICATIONS } from '@/data/mockApplications';
 
-const APPLICATIONS = [
-  {
-    id: 1,
-    role: 'Senior Frontend Engineer',
-    company: 'TechCorp',
-    logo: 'https://cdn.iconscout.com/icon/free/png-256/free-google-1772223-1507807.png',
-    status: 'Interviewing',
-    appliedDate: '12 Jan 2024',
-    location: 'Bangalore'
-  },
-  {
-    id: 2,
-    role: 'Product Designer',
-    company: 'DesignStudio',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png',
-    status: 'Shortlisted',
-    appliedDate: '10 Jan 2024',
-    location: 'Remote'
-  },
-  {
-    id: 3,
-    role: 'Full Stack Developer',
-    company: 'StartupX',
-    logo: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
-    status: 'Rejected',
-    appliedDate: '05 Jan 2024',
-    location: 'Mumbai'
-  },
-  {
-    id: 4,
-    role: 'React Native Dev',
-    company: 'MobileFirst',
-    logo: 'https://cdn-icons-png.flaticon.com/512/174/174857.png',
-    status: 'Applied',
-    appliedDate: '03 Jan 2024',
-    location: 'Pune'
-  }
-];
+
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -60,8 +27,10 @@ const getStatusIcon = (status: string) => {
 };
 
 export const Applications = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="max-w-7xl mx-auto space-y-8 animate-fade-in">
+    <div className="max-w-7xl mx-auto space-y-8 animate-in fade-in pb-10">
       <div className="flex justify-between items-end">
         <div>
           <h1 className="font-display text-3xl font-bold mb-2">My Applications</h1>
@@ -69,7 +38,7 @@ export const Applications = () => {
         </div>
       </div>
 
-      <div className="bg-card border border-border rounded-xl overflow-hidden">
+      <div className="bg-card border border-border rounded-xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
@@ -78,7 +47,7 @@ export const Applications = () => {
                 <th className="p-4 font-semibold text-muted-foreground text-sm">Status</th>
                 <th className="p-4 font-semibold text-muted-foreground text-sm">Applied Date</th>
                 <th className="p-4 font-semibold text-muted-foreground text-sm">Location</th>
-                <th className="p-4 font-semibold text-muted-foreground text-sm">Actions</th>
+                <th className="p-4 font-semibold text-muted-foreground text-sm">Timeline</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
@@ -109,8 +78,13 @@ export const Applications = () => {
                   </td>
                   <td className="p-4 text-sm text-muted-foreground">{app.location}</td>
                   <td className="p-4">
-                    <Button variant="ghost" size="icon">
-                      <MoreHorizontal className="w-4 h-4 text-muted-foreground" />
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="gap-2" 
+                      onClick={() => navigate(`/dashboard/applications/${app.id}`)}
+                    >
+                      View Status <ChevronRight className="w-4 h-4" />
                     </Button>
                   </td>
                 </tr>
