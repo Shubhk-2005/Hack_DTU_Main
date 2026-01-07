@@ -1,15 +1,20 @@
-import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Eye, EyeOff, Mail, Lock, User, Briefcase, UserSearch, Building2, ArrowRight, Loader2, Check, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
+import { InteractiveBackground } from '@/components/InteractiveBackground';
 
 export const LoginPage = () => {
   const { userType = 'seeker' } = useParams<{ userType: 'seeker' | 'employer' }>();
+  const [searchParams] = useSearchParams();
   const isSeeker = userType === 'seeker';
   
-  const [isLogin, setIsLogin] = useState(true);
+  // Check if user came from "Get Started" button (signup mode)
+  const initialMode = searchParams.get('mode');
+  const [isLogin, setIsLogin] = useState(initialMode !== 'signup');
+  
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,6 +26,14 @@ export const LoginPage = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [shakeEmail, setShakeEmail] = useState(false);
+  const [shakePassword, setShakePassword] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Entrance animation
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Email validation
   const validateEmail = (email: string) => {
@@ -55,11 +68,15 @@ export const LoginPage = () => {
     
     if (!validateEmail(email)) {
       setEmailError('Please enter a valid email address');
+      setShakeEmail(true);
+      setTimeout(() => setShakeEmail(false), 500);
       hasErrors = true;
     }
     
     if (password.length < 6) {
       setPasswordError('Password must be at least 6 characters');
+      setShakePassword(true);
+      setTimeout(() => setShakePassword(false), 500);
       hasErrors = true;
     }
     
@@ -99,8 +116,19 @@ export const LoginPage = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
+      {/* Interactive Background with Particles */}
+      <InteractiveBackground 
+        particleCount={30}
+        showCursorGlow={true}
+        showBlobs={true}
+        className="z-0"
+      />
+
+      {/* Aurora gradient overlay */}
+      <div className="absolute inset-0 animate-aurora opacity-15 pointer-events-none z-[1]" />
+
       {/* Animated Video-like Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary/20 to-background">
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary/20 to-background pointer-events-none z-[1]">
         {/* Animated gradient mesh */}
         <div className="absolute inset-0 opacity-30">
           <div className={`absolute top-0 left-0 w-full h-full bg-gradient-to-br ${gradientClass} opacity-20 animate-mesh-1`} />
@@ -138,14 +166,14 @@ export const LoginPage = () => {
       </div>
 
       {/* Main Container */}
-      <div className="w-full max-w-6xl relative z-10">
+      <div className={`w-full max-w-6xl relative z-10 transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="grid lg:grid-cols-2 gap-8 items-stretch">
           {/* Left Card - Branding & Info */}
-          <div className="glass rounded-3xl p-10 flex flex-col justify-between border border-border/50 shadow-card backdrop-blur-2xl">
+          <div className="glass rounded-3xl p-10 flex flex-col justify-between border border-border/50 shadow-card backdrop-blur-2xl animate-card-entrance" style={{ animationDelay: '0.1s' }}>
             {/* Logo */}
             <div>
               <Link to="/" className="flex items-center gap-3 mb-12 group">
-                <div className={`w-14 h-14 rounded-2xl ${isSeeker ? 'bg-primary' : 'bg-accent'} flex items-center justify-center shadow-glow group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`w-14 h-14 rounded-2xl ${isSeeker ? 'bg-primary' : 'bg-accent'} flex items-center justify-center shadow-glow group-hover:scale-110 transition-transform duration-300 hover-logo-pulse animate-glow-breathe`}>
                   <span className="text-primary-foreground font-display font-bold text-3xl">Y</span>
                 </div>
                 <span className="font-display font-bold text-3xl text-foreground">
@@ -249,7 +277,7 @@ export const LoginPage = () => {
               <p className="text-sm text-muted-foreground mb-4">
                 {isSeeker ? 'Looking to hire talent?' : 'Looking for a job?'}
               </p>
-              <Link to={isSeeker ? '/login/employer' : '/login/seeker'} className="block">
+              <Link to={isSeeker ? `/login/employer${initialMode ? '?mode=' + initialMode : ''}` : `/login/seeker${initialMode ? '?mode=' + initialMode : ''}`} className="block">
                 <Button variant="outline" className="w-full gap-2 h-12">
                   {isSeeker ? <Briefcase className="w-5 h-5" /> : <UserSearch className="w-5 h-5" />}
                   {isSeeker ? 'Switch to Employer Portal' : 'Switch to Job Seeker Portal'}
@@ -312,25 +340,25 @@ export const LoginPage = () => {
                 </>
               )}
               
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <div className={`relative ${shakeEmail ? 'animate-shake' : ''}`}>
+                <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${isEmailValid ? 'text-green-500' : 'text-muted-foreground'}`} />
                 <Input
                   type="email"
                   placeholder="Email Address"
                   value={email}
                   onChange={handleEmailChange}
                   onBlur={handleEmailBlur}
-                  className={`pl-12 pr-12 h-12 ${
+                  className={`pl-12 pr-12 h-12 input-glow transition-all duration-300 ${
                     emailError ? 'border-red-500 focus-visible:ring-red-500' : 
                     isEmailValid ? 'border-green-500 focus-visible:ring-green-500' : ''
                   }`}
                   required
                 />
                 {isEmailValid && (
-                  <Check className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500" />
+                  <Check className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500 animate-success-pop" />
                 )}
                 {emailError && (
-                  <AlertCircle className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-red-500" />
+                  <AlertCircle className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-red-500 animate-success-pop" />
                 )}
               </div>
               {emailError && (
@@ -340,14 +368,14 @@ export const LoginPage = () => {
                 </p>
               )}
               
-              <div className="relative">
+              <div className={`relative ${shakePassword ? 'animate-shake' : ''}`}>
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <Input
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Password"
                   value={password}
                   onChange={handlePasswordChange}
-                  className={`pl-12 pr-12 h-12 ${
+                  className={`pl-12 pr-12 h-12 input-glow transition-all duration-300 ${
                     passwordError ? 'border-red-500 focus-visible:ring-red-500' : ''
                   }`}
                   required
